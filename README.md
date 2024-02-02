@@ -25,7 +25,7 @@ The goal of this project is to produce a comprehensive sentiment analysis report
 
 # Data Sources
 To conduct this analysis, we will utilize customer reviews from a variety of sources, including: \
-Kaggle Amazon Dataset with rating and product category: https://www.kaggle.com/datasets/gauravduttakiit/amazon-product-reviews?resource=download
+Kaggle Amazon Dataset with rating and product category: https://www.kaggle.com/datasets/gauravduttakiit/amazon-product-reviews?resource=download \
 Kaggle Amazon Reviews Dataset: https://www.kaggle.com/datasets/bittlingmayer/amazonreviews \
 Kaggle reviews of Amazon Branded Products: https://www.kaggle.com/datasets/datafiniti/consumer-reviews-of-amazon-products \
 HUGE 1GB Amazon Reviews Dataset: https://www.kaggle.com/datasets/kritanjalijain/amazon-reviews
