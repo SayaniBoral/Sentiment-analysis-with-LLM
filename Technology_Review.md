@@ -33,11 +33,14 @@
 ### Transformers (Hugging Face)
 - **Pros:** Provides access to state-of-the-art NLP models capable of deep sentiment analysis and understanding complex language patterns. Highly suitable for extracting sophisticated insights from customer reviews.
 - **Cons:** Requires more computational resources and has a steeper learning curve. May introduce complexity in preprocessing steps due to the need for tokenization and input formatting specific to these advanced models.
+### ADD LLAMA2 
 
 Given the preprocessing code you're working with, focusing on cleaning text and handling missing data, each library offers distinct advantages:
 - **TextBlob** is the most straightforward for directly applying sentiment analysis after your initial preprocessing.
 - **Scikit-learn** is highly beneficial for further data manipulation, especially in preparing your dataset for machine learning tasks.
 - **Transformers** offer the most advanced capabilities for sentiment analysis, assuming the data is preprocessed to fit the model requirements. 
+
+
 
 
 
