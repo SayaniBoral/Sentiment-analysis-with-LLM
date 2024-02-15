@@ -6,8 +6,7 @@ High level description of the software components such as: data manager, which p
 
 The below diagram describes the architecture components of our project
 
-<object data="/Sentiment Analysis using Llama2.pdf" type="application/pdf" width="100%" height="100%">
-</object>
+![](docs/Sentiment Analysis using Llama2.png)
 
 __Input Datasets__ - We have 3 input data files in .tsv format. They will be merged to create a single dataframe containing raw data. Further processing will be done to keep only the required features.
 
