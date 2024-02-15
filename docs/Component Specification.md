@@ -5,7 +5,9 @@
 High level description of the software components such as: data manager, which provides a simplified interface to your data and provides application specific features (e.g., querying data subsets); and visualization manager, which displays data frames as a plot. Describe at least 3 components specifying: what it does, inputs it requires, and outputs it provides. If you have more significant components in your system, we highly suggest documenting those as well.
 
 The below diagram describes the architecture components of our project
-[embed]/Sentiment Analysis using Llama2.pdf/[embed]
+
+<object data="/Sentiment Analysis using Llama2.pdf" type="application/pdf" width="100%" height="100%">
+</object>
 
 __Input Datasets__ - We have 3 input data files in .tsv format. They will be merged to create a single dataframe containing raw data. Further processing will be done to keep only the required features.
 
