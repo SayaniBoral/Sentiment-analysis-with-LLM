@@ -31,5 +31,8 @@ Here is the link: https://www.kaggle.com/datasets/cynthiarempel/amazon-us-custom
 ### Use Case 1:
 
 A local shoe store owner wants to put in a new order for shoes. He has different types that he wants to order. He is interested in knowing what kind of shoes people are 
-buying these days so that he can make a more informed decision. 
+buying these days so that he can make a more informed decision.
+
+### Use Case 2: 
+
 
