@@ -31,8 +31,8 @@ Here is the link: https://www.kaggle.com/datasets/cynthiarempel/amazon-us-custom
 ### Use Case 1:
 
 A local shoe store owner wants to put in a new order for shoes. He has different types that he wants to order. He is interested in knowing what kind of shoes people are 
-buying these days so that he can make a more informed decision.
+buying these days so that he can make a more informed decision. The owner will be able to run our program using the terminal at the least. The process is straighforward and documented.
 
 ### Use Case 2: 
 
-
+A clothing wholesaler has been losing a lot of money on clothing, they need to know some trends in the market. The firm will task their data analyst with using our tool to see what amazon shoppers are liking when it comes to clothing. The analyst will follow the directions and get the relevant output.
