@@ -17,4 +17,3 @@ __Streamlit app__ - This will be the user interface of our application. The user
 
 We can see the interaction diagram/ user experience flow below:
 ![Interaction Flow](<Interaction flow.png>)
-
