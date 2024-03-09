@@ -68,8 +68,8 @@ def main():
     st.title('Amazon Reviews Analysis with Sentiment')
 
     # Load the dataframe
-    df = load_data('df_with_sentiment.csv')
-    # df = load_data('ddata/final/df_with_sentiment.csv')
+    # df = load_data('df_with_sentiment.csv')
+    df = load_data('ddata/final/df_with_sentiment.csv')
     # Apply user-selected filters and display the results
     filtered_df = apply_filters(df)
     display_dataframe(filtered_df)
