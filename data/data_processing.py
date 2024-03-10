@@ -1,8 +1,7 @@
-# data_processing.py
 import os
 import pandas as pd
 
-# Constants should be capitalized
+# Constants are capitalized (PEP 8)
 DATA_DIR = "amazon_raw_data"
 DATASET_PATHS = {
     'Gift Card': os.path.join(DATA_DIR, 'amazon_reviews_us_Gift_Card_v1_00.tsv'),
@@ -12,7 +11,16 @@ DATASET_PATHS = {
 }
 
 def read_dataset(dataset_path):
-    """Reads a dataset from a given file path and returns a DataFrame."""
+    """
+    Reads a dataset from a specified file path using pandas.
+
+    Parameters:
+    - dataset_path (str): The path to the dataset file.
+
+    Returns:
+    - DataFrame: Loaded data as pandas DataFrame.
+    - str: An empty string on success, or an error message on failure.
+    """
     try:
         df = pd.read_csv(dataset_path, sep='\t', error_bad_lines=False, warn_bad_lines=False)
         return df, ""
@@ -20,62 +28,73 @@ def read_dataset(dataset_path):
         return pd.DataFrame(), str(e)
 
 def merge_datasets(selected_category):
-    """Merges datasets based on the selected category or 'all'."""
+    """
+    Merges datasets based on the selected category or merges all if 'all' is selected.
+
+    Parameters:
+    - selected_category (str): The category of datasets to merge or 'all'.
+
+    Returns:
+    - DataFrame: Merged dataset(s) as pandas DataFrame.
+    - str: An empty string on success, or an error message on failure.
+    """
     if selected_category in DATASET_PATHS:
         return read_dataset(DATASET_PATHS[selected_category])
     elif selected_category == 'all':
-        dfs = [read_dataset(path) for path in DATASET_PATHS.values()]
+        dfs = [read_dataset(path)[0] for path in DATASET_PATHS.values()]
         return pd.concat(dfs, ignore_index=True), ""
+    else:
+        return pd.DataFrame(), "Invalid category specified."
 
 def remove_specific_columns(df):
-    """Removes specific columns from the DataFrame."""
+    """
+    Removes specific columns from a DataFrame.
+
+    Parameters:
+    - df (DataFrame): The pandas DataFrame to process.
+
+    Returns:
+    - DataFrame: The DataFrame with specific columns removed.
+    """
     return df.drop(columns=["customer_id", "review_id", "product_id"])
 
 def modify_review_date_to_year(df):
-    """Converts the review date to retain only the year."""
+    """
+    Modifies the review_date column of a DataFrame to only include the year.
+
+    Parameters:
+    - df (DataFrame): The pandas DataFrame to process.
+
+    Returns:
+    - DataFrame: The DataFrame with modified review_date column.
+    """
     df['review_date'] = pd.to_datetime(df['review_date'], errors='coerce').dt.year
     df.dropna(subset=['review_date'], inplace=True)
     df['review_date'] = df['review_date'].astype(int)
     return df
 
 def categorize_votes(df, column_names):
-    """Categorizes votes into engagement levels."""
+    """
+    Categorizes votes into engagement levels based on provided column names.
+
+    Parameters:
+    - df (DataFrame): The pandas DataFrame to process.
+    - column_names (list): List of column names to categorize.
+
+    Returns:
+    - DataFrame: The DataFrame with vote categories added.
+    """
     for column in column_names:
         category_col_name = f'{column}_category'
         df[category_col_name] = 'No Votes'  # Default category for 0 votes
         has_votes = df[column] > 0
         votes_data = df.loc[has_votes, column]
         
-        unique_values = votes_data.unique()
-        if len(unique_values) > 4:
-            try:
-                df.loc[has_votes, category_col_name] = pd.qcut(
-                    votes_data, q=4,
-                    labels=["Minimal Engagement", "Low Engagement",
-                            "Moderate Engagement", "High Engagement"])
-            except ValueError:
-                df.loc[has_votes, category_col_name] = pd.cut(
-                    votes_data, bins=4,
-                    labels=["Minimal Engagement", "Low Engagement",
-                            "Moderate Engagement", "High Engagement"])
-        else:
-            df.loc[has_votes, category_col_name] = pd.cut(
-                votes_data, bins=4,
-                labels=["Minimal Engagement", "Low Engagement",
-                        "Moderate Engagement", "High Engagement"])
+        # Dynamically categorize based on unique values in votes_data
+        try:
+            df.loc[has_votes, category_col_name] = pd.qcut(
+                votes_data, q=4, labels=["Minimal", "Low", "Moderate", "High"])
+        except ValueError:
+            # Fallback for when qcut fails due to identical values
+            df.loc[has_votes, category_col_name] = "Minimal"
     return df
-
-if __name__ == "__main__":
-    # Test functionality when running this script directly
-    category = 'Electronics'  # Example category
-    df, error = merge_datasets(category)
-    if not error:
-        print(f"Dataset for '{category}' loaded successfully.")
-        df = remove_specific_columns(df)
-        print("Specific columns removed.")
-        df = modify_review_date_to_year(df)
-        print("Review dates modified to retain only the year.")
-        df = categorize_votes(df, ['helpful_votes', 'total_votes'])
-        print("Votes categorized into engagement levels.")
-    else:
-        print(f"Failed to load dataset for '{category}': {error}")
