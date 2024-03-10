@@ -1,3 +1,14 @@
+# Ignore macOS system files
+.DS_Store
+
+# Ignore specific directories
+data/extracted/
+data/raw/
+data/amazon_raw_data/*.tsv
+
+# Ignore Jupyter notebook checkpoints
+.ipynb_checkpoints
+
 data_eda.ipynb.DS_Store
 
 data/extracted
