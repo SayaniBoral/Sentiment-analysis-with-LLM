@@ -1,3 +1,19 @@
+"""
+This module contains the script for processing the raw data files. 
+It contains functions to read, merge data files. 
+Additionally there are functions to transform columns
+
+Example usage:
+
+    import numpy as np
+    from data_processing import merge_datasets
+
+    # Load training data and query sample
+    data=merge_datasets('all')
+    display(data)
+    
+"""
+
 import os
 import pandas as pd
 
@@ -24,7 +40,7 @@ def read_dataset(dataset_path):
     try:
         df = pd.read_csv(dataset_path, sep='\t', error_bad_lines=False, warn_bad_lines=False)
         return df, ""
-    except Exception as e:
+    except ValueError as e:
         return pd.DataFrame(), str(e)
 
 def merge_datasets(selected_category):
@@ -40,11 +56,10 @@ def merge_datasets(selected_category):
     """
     if selected_category in DATASET_PATHS:
         return read_dataset(DATASET_PATHS[selected_category])
-    elif selected_category == 'all':
+    if selected_category == 'all':
         dfs = [read_dataset(path)[0] for path in DATASET_PATHS.values()]
         return pd.concat(dfs, ignore_index=True), ""
-    else:
-        return pd.DataFrame(), "Invalid category specified."
+    return pd.DataFrame(), "Invalid category specified."
 
 def remove_specific_columns(df):
     """
@@ -89,7 +104,6 @@ def categorize_votes(df, column_names):
         df[category_col_name] = 'No Votes'  # Default category for 0 votes
         has_votes = df[column] > 0
         votes_data = df.loc[has_votes, column]
-        
         # Dynamically categorize based on unique values in votes_data
         try:
             df.loc[has_votes, category_col_name] = pd.qcut(

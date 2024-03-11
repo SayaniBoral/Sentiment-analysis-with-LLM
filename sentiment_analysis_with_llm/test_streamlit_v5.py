@@ -1,8 +1,14 @@
+"""
+This module contains the script for visualizing the amazon product review app
+"""
 import streamlit as st
 import pandas as pd
 
 
 def apply_custom_css():
+    """
+    Function to apply the css style to streamlit web app
+    """
     st.markdown("""
         <style>
         /* Set the overall background color */
@@ -31,13 +37,18 @@ def apply_filters(dataframe):
     st.sidebar.header('Filter Options')
     dataframe['review_date'] = dataframe['review_date'].astype(str)
 
-    marketplace = st.sidebar.selectbox('Marketplace:', ['All'] + list(dataframe['marketplace'].unique()))
-    category = st.sidebar.selectbox('Product Category:', ['All'] + list(dataframe['product_category'].unique()))
-    min_rating, max_rating = int(dataframe['star_rating'].min()), int(dataframe['star_rating'].max())
+    marketplace = st.sidebar.selectbox('Marketplace:', ['All']
+                                       + list(dataframe['marketplace'].unique()))
+    category = st.sidebar.selectbox('Product Category:', ['All']
+                                    + list(dataframe['product_category'].unique()))
+    min_rating, max_rating = int(dataframe['star_rating'].min()), \
+    int(dataframe['star_rating'].max())
     rating = st.sidebar.slider('Star Rating:', min_value=min_rating, max_value=max_rating,
                                value=(min_rating, max_rating))
-    verified = st.sidebar.selectbox('Verified Purchase:', ['All'] + list(dataframe['verified_purchase'].unique()))
-    review_year = st.sidebar.selectbox('Review Year:', ['All'] + sorted(dataframe['review_date'].str[:4].unique()))
+    verified = st.sidebar.selectbox('Verified Purchase:', ['All']
+                                    + list(dataframe['verified_purchase'].unique()))
+    review_year = st.sidebar.selectbox('Review Year:', ['All']
+                                       + sorted(dataframe['review_date'].str[:4].unique()))
 
     display_scores = st.sidebar.checkbox('Display Scores', value=False)
 
@@ -45,7 +56,8 @@ def apply_filters(dataframe):
         dataframe = dataframe[dataframe['marketplace'] == marketplace]
     if category != 'All':
         dataframe = dataframe[dataframe['product_category'] == category]
-    dataframe = dataframe[(dataframe['star_rating'] >= rating[0]) & (dataframe['star_rating'] <= rating[1])]
+    dataframe = dataframe[(dataframe['star_rating'] >= rating[0])
+                          & (dataframe['star_rating'] <= rating[1])]
     if verified != 'All':
         dataframe = dataframe[dataframe['verified_purchase'] == verified]
     if review_year != 'All':
@@ -55,8 +67,14 @@ def apply_filters(dataframe):
 
 
 def rank_and_select_products(dataframe):
-    dataframe['verified_purchase_numeric'] = dataframe['verified_purchase'].apply(lambda x: 1 if x == 'Y' else 0)
-    dataframe['polarity_numeric'] = dataframe['polarity'].apply(lambda x: 1 if x == 'positive' else -1)
+    """
+    This function is used to rank products based on composite sentiment score.
+    It returns the top and bottom products
+    """
+    dataframe['verified_purchase_numeric'] = dataframe['verified_purchase']\
+    .apply(lambda x: 1 if x == 'Y' else 0)
+    dataframe['polarity_numeric'] = dataframe['polarity']\
+    .apply(lambda x: 1 if x == 'positive' else -1)
 
     dataframe['score'] = (
                                  dataframe['polarity_numeric'] * 2 +
@@ -94,6 +112,9 @@ def display_products_table(products, display_score, title):
 
 
 def main():
+    """
+    Main function to call all functions in a pipeline
+    """
     apply_custom_css()
     st.title('Amazon Reviews Analysis with Sentiment')
 
@@ -103,8 +124,10 @@ def main():
     display_products_table(top_products, display_scores, "Top Products")
     display_products_table(bottom_products, display_scores, "Bottom Products")
 
-    st.markdown(
-        "Note: If more than 5 products share the same score, all of those products will be displayed. Double click to see the entire row.")
+    st.markdown("""
+        Note: If more than 5 products share the same score, all of those products will be displayed. 
+                Double click to see the entire row.
+                """)
 
 
 if __name__ == "__main__":
