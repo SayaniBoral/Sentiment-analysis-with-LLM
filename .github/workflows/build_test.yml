@@ -1,0 +1,54 @@
+name: build_test
+
+# What is the event that triggers this workflow? Options include
+# push, pull_request, create, issues, etc. This configuration says
+# that you should run on pushes to the main branch (ie after a PR
+# is merged), or when a pull request is created to merge into main.
+on:
+  push:
+    branches:
+      - main
+
+# A list of jobs to run as part of the workflow
+jobs:
+
+  # Each job gets a name. This one builds/tests all branches.
+  build_test:
+
+    # Provide a runner. Options are listed on GitHub, but include
+    # windows, ubuntu, and macos (latest, as well as specific versions)
+    runs-on: ubuntu-latest
+
+    # In order to get Conda environments to work properly, we need to
+    # tell the runner to start up the bash shell in a way that respects
+    # the changes Conda makes to bash profile files.
+    # More at:
+    # https://github.com/marketplace/actions/setup-miniconda#use-a-default-shell
+    defaults:
+      run:
+        shell: bash -el {0}
+
+    # We specify all versions of Python that we want to validate.
+    # GitHub will run the tests for each of these Python versions.
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10", "3.11"]
+
+    # The actual workflow steps!
+    steps:
+      # First, check out the repository for the current branch.
+      - uses: actions/checkout@v3
+
+      # Then set up Python with a python version from the matrix.
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      
+      # If there are any other steps in order for your tests to
+      # run successfully, you can add those steps here!
+
+      # Next step: run pylint. Anything less than 10/10 will fail.
+      - name: Lint with pylint
+        run: |
+          pylint sentiment-analysis-with-LLM/**/*.py
