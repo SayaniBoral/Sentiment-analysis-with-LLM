@@ -70,4 +70,5 @@ jobs:
       # Next step: run pylint. Anything less than 10/10 will fail.
       - name: Lint with pylint
         run: |
-          pylint sentiment-analysis-with-LLM/**/*.py
+          pylint sentiment-analysis-with-LLM/data_processing.py
+          pylint sentiment-analysis-with-LLM/review_app.py
