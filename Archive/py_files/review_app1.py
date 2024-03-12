@@ -1,3 +1,6 @@
+"""
+This module contains the script for visualizing the amazon product review app
+"""
 import streamlit as st
 import pandas as pd
 

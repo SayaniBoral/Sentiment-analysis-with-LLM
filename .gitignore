@@ -13,3 +13,6 @@ data_eda.ipynb.DS_Store
 
 data/extracted
 data/raw
+
+.pytest_cache
+
