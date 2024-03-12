@@ -45,6 +45,25 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       
+      # This is an Action published by the Conda team to get your
+      # Conda environment set up using your environment.yml file.
+      # More at https://github.com/marketplace/actions/setup-miniconda
+      - name: Set up conda
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          # Use the environment name from your environment.yml file
+          activate-environment: sentiment-analysis-llm
+          # The name of the environment file you want conda to use
+          environment-file: environment.yml
+          # Whether you want conda to automatically update the conda
+          # version (helpful when some runners have old versions of
+          # conda)
+          auto-update-conda: true
+          # Which version of python you want conda to use
+          python-version: ${{ matrix.python-version }}
+          # We don't need the base environment, so don't activate it
+          auto-activate-base: false
+      
       # If there are any other steps in order for your tests to
       # run successfully, you can add those steps here!
 

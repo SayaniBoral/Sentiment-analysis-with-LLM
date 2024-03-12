@@ -1,0 +1,9 @@
+name: sentiment-analysis-llm
+channels:
+  - defaults
+dependencies:
+  - build
+  - numpy
+  - pandas
+  - pylint
+  - python=3
