@@ -14,10 +14,9 @@ and refine product offerings. It supports searching and filtering by categories,
 ## User profile. Who uses the system? What they know about the domain and computing?
 
 The user of the system does not need to be a developer, but they need to have some technical proficiency. This tool is an analysis tool, and is intended to be used by 
-someone who has the skills of a data analyst at the minimum. The data analyst, even if not familiar with programming languages, will still be able to get the insights. 
+someone who has the skills of an entry level data analyst at the minimum. The data analyst, even if not familiar with programming languages, will still be able to get the insights. 
 The reach goal for this project is to be able to have some type of basic UI in the browser, at the very least have it be some type of a graphical user interface. In that
-case, a data analyst level of computing knowledge will not even be required. But, for the user profile we will assume the worst case, which is that our end UI will be 
-the terminal interface. There will be good enough documentation and a data analyst will be able to use the tool. 
+case, a data analyst level of computing knowledge will not even be required. There is a UI that needs to be run from the terminal. 
 
 ## Data sources. What data you will use and how it is structured?
 
