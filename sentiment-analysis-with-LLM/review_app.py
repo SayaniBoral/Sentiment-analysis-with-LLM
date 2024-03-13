@@ -118,7 +118,7 @@ def main():
     apply_custom_css()
     st.title('Amazon Reviews Analysis with Sentiment')
 
-    df = load_data('df_with_sentiment.csv')  # Make sure this path is correct
+    df = load_data('data/processed_data_with_sentiments/df_with_sentiment.csv')  # Make sure this path is correct
     filtered_df, display_scores = apply_filters(df)
     top_products, bottom_products = rank_and_select_products(filtered_df)
     display_products_table(top_products, display_scores, "Top Products")
