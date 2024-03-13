@@ -7,10 +7,6 @@ This project aims to leverage the capabilities of Large Language Models (LLMs) t
 This initiative is an analytical project focused on exploring the sentiment analysis capabilities of LLMs. We will utilize advanced LLMs to interpret and classify the sentiments expressed in customer reviews, categorizing them into positive, negative, and neutral sentiments.
 
 
-## Directory Struc
--- Need to ADD
-
-
 ## Project Goal
 The goal of this project is to produce a comprehensive sentiment analysis report detailing the sentiments expressed in customer reviews. This report will include:
 
@@ -39,7 +35,7 @@ There are product reviews for multiple product categories. We chose datasets of 
 
 - **Engagement Level Categorization**: `helpful_votes` and `total_votes` are categorized into four engagement levels: Minimal Engagement, Low Engagement, Moderate Engagement, High Engagement. A special category, 'No Votes', is introduced for reviews without votes, allowing for nuanced analysis of user engagement with products.
 
-## How to Use
+## How to use the application?
 
 1. **Select a Product Category**: At the start, users are prompted to select a product category. They can choose from specific categories like Gift Card, Major Appliances, Shoes, Electronics, or opt for analyzing all categories combined.
 
@@ -49,10 +45,10 @@ There are product reviews for multiple product categories. We chose datasets of 
 
 4. **Review and Analyze**: After making their selections, the script filters the dataset accordingly and displays the filtered dataset. This allows users to review and analyze the data based on their specific criteria, facilitating informed decision-making or further data exploration.
 
-# How to use this project?
+# How to run this code?
 
-1. Download the necessary raw files from this URL:
+1. Download the necessary raw files from this URL: https://www.kaggle.com/datasets/cynthiarempel/amazon-us-customer-reviews-dataset
 2. Run the data_processing.py file to merge 4 raw data files, perform data manipulation and sampling to reduce dataset size
 3. Upload the reduced dataset and Sentiment_Analysis_using_llama2.ipynb to Google Colab Enterprise to run the LLM and generate sentiment polarity and scores. Once processed, download the csv: df_with_sentiments.csv
 4. To view the final application, run the following code from your terminal: 
-streamlit run test_streamlit_v5.py
+`streamlit run sentiment-analysis-with-LLM/review_app.py`
